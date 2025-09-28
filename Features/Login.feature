@@ -4,12 +4,12 @@ As a user, I want to log in to the application so that I can access restricted c
 Scenario: Attempt to log in with an unregistered email
   Given I am on the Login page
   When I enter an unregistered email and password
-  Then I should see a "Confirm your email" notification
+  Then I should see an error message
 
 Scenario: Log in with valid credentials
   Given I am on the Login page
   When I enter valid credentials
-  Then I should be redirected to the secure area
+  Then I should see the secure area
 
 Scenario: Log in with an invalid password
   Given I am on the Login page

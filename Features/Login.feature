@@ -1,27 +1,27 @@
 Feature: User Login
-As a user, I want to log in to the application so that I can access restricted content.
+As a user, I want to log in to access restricted content.
 
-Scenario: Attempt to log in with an unregistered email
-  Given I am on the Login page
-  When I enter an unregistered email and password
-  Then I should see an error message
-
-Scenario: Log in with valid credentials
+Scenario: Perform a successful login
   Given I am on the Login page
   When I enter valid credentials
   Then I should see the secure area
 
-Scenario: Log in with an invalid password
-  Given I am on the Login page
-  When I enter a valid username and an invalid password
-  Then I should see an error message
+ Scenario: Attempt to log in with invalid credentials
+    Given I am on the Login page
+    When I enter invalid credentials
+    Then I should see an error message
 
-Scenario: Log in with an invalid username
-  Given I am on the Login page
-  When I enter an invalid username and a valid password
-  Then I should see an error message 
+  Scenario: Leave the email field empty
+    Given I am on the Login page
+    When I leave the email field empty
+    Then I should see a validation message for invalid email
 
-Scenario: Attempt to log in with empty fields
-  Given I am on the Login page
-  When I leave the username and password fields empty
-  Then I should see an error message
+  Scenario: Leave the password field empty
+    Given I am on the Login page
+    When I leave the password field empty
+    Then I should see a validation message for password length
+
+  Scenario: Log in with an invalid email format
+    Given I am on the Login page
+    When I enter an invalid email format in the username field
+    Then I should see a validation message for invalid email

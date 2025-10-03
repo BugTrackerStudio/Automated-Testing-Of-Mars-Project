@@ -10,14 +10,28 @@ namespace qa_dotnet_cucumber.Pages
     public class LoginPage
     {
         private readonly IWebDriver _driver;
-        private readonly By UsernameField = By.Id("username");
-        private readonly By PasswordField = By.Id("password");
-        private readonly By LoginButton = By.CssSelector("button[type='submit']");
+        private readonly WebDriverWait _wait;
+        public IWebDriver Driver => _driver;
         private readonly By SuccessMessage = By.CssSelector(".flash.success");
+
+        private readonly By SignInLink = By.XPath("//a[normalize-space()='Sign In']");
+        private readonly By UsernameField = By.XPath("//input[@type='email' or @placeholder='Email address' or @name='Email' or @id='email']");
+        private readonly By PasswordField = By.CssSelector("input[type='password']");
+        private readonly By LoginButton = By.XPath("//button[normalize-space()='Login']");
+
 
         public LoginPage(IWebDriver driver)
         {
             _driver = driver;
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+        }
+
+        public void OpenSignIn()
+        {
+            var signIn = _wait.Until(
+        SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(
+            By.XPath("//a[normalize-space()='Sign In']")));
+            signIn.Click();
         }
 
         public void Login(string username, string password)
@@ -25,11 +39,6 @@ namespace qa_dotnet_cucumber.Pages
             _driver.FindElement(UsernameField).SendKeys(username);
             _driver.FindElement(PasswordField).SendKeys(password);
             _driver.FindElement(LoginButton).Click();
-        }
-
-        public string GetSuccessMessage()
-        {
-            return _driver.FindElement(SuccessMessage).Text;
         }
     }
 

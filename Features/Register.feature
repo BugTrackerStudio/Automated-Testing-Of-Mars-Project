@@ -9,7 +9,7 @@ Scenario: Register with valid credentials
 Scenario: Register with an already registered email
   Given I am on the registration page
   When I enter an already registered email
-  Then I should see an error message "This email is already registered"
+  Then I should see an error message "This email has already been used to register an account."
 
 Scenario: Register with an invalid email format
   Given I am on the registration page

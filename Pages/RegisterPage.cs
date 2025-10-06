@@ -29,41 +29,51 @@ namespace qa_dotnet_cucumber.Pages
 
         public void OpenJoin()
         {
-            var join = _wait.Until(
+            var joinButton = _wait.Until(
         SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(
-            By.XPath("//a[normalize-space()='Join']")));
-            join.Click();
+            By.XPath("//button[normalize-space()='Join']")));
+            joinButton.Click();
+
+            // Wait for the popup/modal to appear
+            //_wait.Until(
+              //  SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(
+                //    By.CssSelector(".ui.tiny.modal.transition.visible.active")));
         }
 
         // Methods to interact with elements
         public void EnterFirstName(string firstName)
         {
-            _driver.FindElement(FirstNameField).Clear();
-            _driver.FindElement(FirstNameField).SendKeys(firstName);
+            var element = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(FirstNameField));
+            element.Clear();
+            element.SendKeys(firstName);
         }
 
         public void EnterLastName(string lastName)
         {
-            _driver.FindElement(LastNameField).Clear();
-            _driver.FindElement(LastNameField).SendKeys(lastName);
+            var element = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(LastNameField));
+            element.Clear();
+            element.SendKeys(lastName);
         }
 
         public void EnterEmail(string email)
         {
-            _driver.FindElement(EmailField).Clear();
-            _driver.FindElement(EmailField).SendKeys(email);
+            var element = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(EmailField));
+            element.Clear();
+            element.SendKeys(email);
         }
 
         public void EnterPassword(string password)
         {
-            _driver.FindElement(PasswordField).Clear();
-            _driver.FindElement(PasswordField).SendKeys(password);
+            var element = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(PasswordField));
+            element.Clear();
+            element.SendKeys(password);
         }
 
         public void EnterConfirmPassword(string confirmPassword)
         {
-            _driver.FindElement(ConfirmPasswordField).Clear();
-            _driver.FindElement(ConfirmPasswordField).SendKeys(confirmPassword);
+            var element = _wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(ConfirmPasswordField));
+            element.Clear();
+            element.SendKeys(confirmPassword);
         }
 
         public void CheckTerms()
@@ -80,35 +90,35 @@ namespace qa_dotnet_cucumber.Pages
             _driver.FindElement(JoinButton).Click();
         }
 
-        // Clear any field dynamically
-        public void ClearField(string fieldName)
-        {
-            switch (fieldName.ToLower())
-            {
-                case "first name":
-                    _driver.FindElement(FirstNameField).Clear();
-                    break;
-                case "last name":
-                    _driver.FindElement(LastNameField).Clear();
-                    break;
-                case "email":
-                    _driver.FindElement(EmailField).Clear();
-                    break;
-                case "password":
-                    _driver.FindElement(PasswordField).Clear();
-                    break;
-                case "confirm password":
-                    _driver.FindElement(ConfirmPasswordField).Clear();
-                    break;
-            }
-        }
-
         // Get error message for any field 
         public string GetErrorMessage(string fieldName)
         {
-            string fieldNameAttr = fieldName.ToLower().Replace(" ", "");
-            var errorDiv = _driver.FindElement(By.CssSelector($"div.field.error input[name='{fieldNameAttr}'] + div"));
-            return errorDiv.Text;
+            string fieldAttr = "";
+
+            switch (fieldName.ToLower())
+            {
+                case "first name":
+                    fieldAttr = "firstName";
+                    break;
+                case "last name":
+                    fieldAttr = "lastName";
+                    break;
+                case "email":
+                    fieldAttr = "email";
+                    break;
+                case "password":
+                    fieldAttr = "password";
+                    break;
+                case "confirm password":
+                    fieldAttr = "confirmPassword";
+                    break;
+            }
+
+            var errorElement = _driver.FindElement(
+                By.CssSelector($"div.field.error input[name='{fieldAttr}'] + div")
+            );
+            return errorElement.Text;
         }
+
     }
 }

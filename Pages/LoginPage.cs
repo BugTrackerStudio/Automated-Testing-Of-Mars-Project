@@ -12,7 +12,6 @@ namespace qa_dotnet_cucumber.Pages
         private readonly IWebDriver _driver;
         private readonly WebDriverWait _wait;
         public IWebDriver Driver => _driver;
-        private readonly By SuccessMessage = By.CssSelector(".flash.success");
 
         private readonly By SignInLink = By.XPath("//a[normalize-space()='Sign In']");
         private readonly By UsernameField = By.XPath("//input[@type='email' or @placeholder='Email address' or @name='Email' or @id='email']");

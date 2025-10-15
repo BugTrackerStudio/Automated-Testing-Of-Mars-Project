@@ -282,8 +282,37 @@ namespace qa_dotnet_cucumber.Steps
         // ----------------------
         // Prevent duplicate language on edit
         // ----------------------
+        [When(@"I try to change ""(.*)"" to ""(.*)""")]
+        public void WhenITryToChangeLanguageTo(string oldLanguage, string newLanguage)
+        {
+            _languagePage.ClickEditIcon(oldLanguage);
 
+            // Check if the new language already exists
+            if (_languagePage.IsLanguagePresent(newLanguage))
+            {
+                Console.WriteLine($"Cannot change '{oldLanguage}' to '{newLanguage}' because it already exists.");
+                _languagePage.CancelAddOrEdit();
+            }
+            else
+            {
+                _languagePage.EnterLanguage(newLanguage);
+                _languagePage.SaveLanguage();
+            }
+        }
 
+        [Then(@"""(.*)"" should remain unchanged in the Languages list")]
+        public void ThenLanguageShouldRemainUnchanged(string language)
+        {
+            bool isPresent = _languagePage.IsLanguagePresent(language);
+            Assert.That(isPresent, Is.True, $"Expected language '{language}' to remain in the list.");
+        }
+
+        [Then(@"there should still be only one ""(.*)"" in the Languages list")]
+        public void ThenThereShouldStillBeOnlyOneLanguageInTheList(string language)
+        {
+            bool isUnique = _languagePage.IsLanguageUnique(language);
+            Assert.That(isUnique, Is.True, $"Expected only one '{language}' in the list, but found duplicates.");
+        }
 
         // ----------------------
         // Delete Language

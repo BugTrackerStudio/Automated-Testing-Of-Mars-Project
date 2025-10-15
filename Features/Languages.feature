@@ -43,6 +43,15 @@ Scenario: Edit a language level
 	Then I should see a notification "Gujarati has been updated to your languages"
 	And "Gujarati - Basic" should appear in the Languages list
 
+Scenario: Prevent duplicate language on edit
+	Given I have "Marathi" in my Languages list
+	And I have "English" in my Languages list
+	When I try to change "Marathi" to "English"
+	Then I should see a notification "Duplicate data"
+	And "Marathi" should remain unchanged in the Languages list
+	And there should still be only one "English" in the Languages list
+
+
   # ----------------------
   # Deleting Languages
   # ----------------------

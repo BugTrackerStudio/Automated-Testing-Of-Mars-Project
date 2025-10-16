@@ -19,9 +19,9 @@ namespace qa_dotnet_cucumber.Pages
         private readonly By AddNewButton = By.XPath("//div[contains(@class,'ui teal button') and normalize-space()='Add New']");
         private readonly By LanguageInput = By.XPath("//input[@placeholder='Add Language']");
         private readonly By LevelDropdown = By.Name("level");
+        private readonly By NotificationMessage = By.CssSelector(".ns-box.ns-growl.ns-show .ns-box-inner");
         private readonly By SaveButton = By.XPath("//input[@value='Add'] | //input[@value='Update']");
         private readonly By CancelButton = By.XPath("//input[@value='Cancel']");
-        private readonly By NotificationMessage = By.CssSelector(".ns-box.ns-growl.ns-show .ns-box-inner");
         private readonly By LanguageListItems = By.CssSelector("div.form-wrapper table tbody tr");
 
         public LanguagePage(IWebDriver driver)
@@ -43,10 +43,7 @@ namespace qa_dotnet_cucumber.Pages
             catch { /* Ignore timeout */ }
         }
 
-        // ----------------------
         // Add Language
-        // ----------------------
-
         public List<string> GetAllLanguages()
         {
             var languages = new List<string>();
@@ -96,7 +93,6 @@ namespace qa_dotnet_cucumber.Pages
 
             }
         }
-
         public void EnterLanguage(string language)
         {
             // Wait until the input is visible and enabled
@@ -115,10 +111,12 @@ namespace qa_dotnet_cucumber.Pages
         public void SelectLevel(string level)
         {
             _wait.Until(ExpectedConditions.ElementIsVisible(LevelDropdown));
-
             var dropdown = new SelectElement(_driver.FindElement(LevelDropdown));
+
             if (string.IsNullOrEmpty(level))
+
                 level = "Basic"; // default level
+
             dropdown.SelectByText(level);
         }
 
@@ -149,23 +147,14 @@ namespace qa_dotnet_cucumber.Pages
             _driver.FindElement(CancelButton).Click();
         }
 
-        // ----------------------
         // Edit Language
-        // ----------------------
         public void ClickEditIcon(string language)
         {
             var editIcon = _driver.FindElement(By.XPath($"//tr[td[1][normalize-space()='{language}']]//i[contains(@class,'write')]"));
             editIcon.Click();
         }
 
-        // ----------------------
         // Verification
-        // ----------------------
-        public string GetNotification()
-        {
-            return _wait.Until(ExpectedConditions.ElementIsVisible(NotificationMessage)).Text;
-        }
-
         public bool IsLanguagePresent(string languageWithLevel)
         {
             string language;
@@ -207,7 +196,6 @@ namespace qa_dotnet_cucumber.Pages
                 return false;
             }
         }
-
         public string GetLanguageLevel(string language)
         {
             try
@@ -230,9 +218,8 @@ namespace qa_dotnet_cucumber.Pages
             }
         }
 
-        // ----------------------
         // Duplicate & Limit Checks
-        // ----------------------
+
         public bool IsDuplicateLanguage(string language)
         {
             return IsLanguagePresent(language); // If already present, it's duplicate
@@ -276,9 +263,7 @@ namespace qa_dotnet_cucumber.Pages
             }
         }
 
-        // ----------------------
         // Delete Language
-        // ----------------------
         public void ClickDeleteIcon(string language)
         {
             var deleteIcon = _driver.FindElement(By.XPath($"//tr[td[1][normalize-space()='{language}']]//i[contains(@class,'remove')]"));

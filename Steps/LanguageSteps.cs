@@ -11,44 +11,14 @@ namespace qa_dotnet_cucumber.Steps
     public class LanguageSteps
     {
         public readonly LanguagePage _languagePage;
-        private readonly LoginPage _loginPage;
-        private readonly NavigationHelper _navigationHelper;
         private readonly WebDriverWait _wait;
-        private bool _actionOccurred;
+        private readonly CommonSteps _commonSteps;
 
-        public LanguageSteps(LanguagePage languagePage, LoginPage loginPage, NavigationHelper navigationHelper)
+        public LanguageSteps(LanguagePage languagePage, CommonSteps commonSteps, IWebDriver driver)
         {
             _languagePage = languagePage;
-            _loginPage = loginPage;
-            _navigationHelper = navigationHelper;
+            _commonSteps = commonSteps;
             _wait = new WebDriverWait(_languagePage.Driver, TimeSpan.FromSeconds(10));
-        }
-
-        [Given("I am logged in with valid credentials")]
-        public void GivenIAmLoggedInWithValidCredentials()
-        {
-            // Navigate to login page
-            _navigationHelper.NavigateTo("/");
-
-            // Open sign-in form
-            _loginPage.OpenSignIn();
-
-            // Perform login
-            _loginPage.Login("krutipatel362000@gmail.com", "Krumik_26");
-
-            // Wait until the greeting "Hi Kruti" appears
-            WebDriverWait wait = new WebDriverWait(_loginPage.Driver, TimeSpan.FromSeconds(20));
-            wait.Until(driver =>
-            {
-                var greeting = driver.FindElement(By.CssSelector("span.item.ui.dropdown.link"));
-                return greeting.Displayed && greeting.Text.StartsWith("Hi");
-            });
-        }
-
-        [Given("I am on the Profile page")]
-        public void GivenIAmOnTheProfilePage()
-        {
-            _navigationHelper.NavigateTo("/Account/Profile");
         }
 
         // ----------------------
@@ -93,8 +63,8 @@ namespace qa_dotnet_cucumber.Steps
             _languagePage.EnterLanguage(language);
         }
 
-        [When(@"I select ""(.*)"" as the level")]
-        public void WhenISelectAsTheLevel(string level)
+        [When(@"I select ""(.*)"" as the language level")]
+        public void WhenISelectLanguageLevel(string level)
         {
             _languagePage.SelectLevel(level);
         }
@@ -103,29 +73,6 @@ namespace qa_dotnet_cucumber.Steps
         public void WhenISaveTheLanguage()
         {
             _languagePage.SaveLanguage();
-        }
-
-        [Then(@"I should see a notification ""(.*)""")]
-        public void ThenIShouldSeeANotification(string expectedMessage)
-        {
-            if (!_actionOccurred)
-            {
-                Console.WriteLine("No action performed, skipping notification check.");
-                return;
-            }
-            string actualMessage = _languagePage.GetNotification();
-            string[] validMessages = new[]
-                        {
-                           "has been added to your languages",
-                           "already exist",
-                           "already added",
-                           "has been deleted from your languages",
-                            "Duplicate data",
-                            "has been updated to your languages"
-                          };
-
-            Assert.That(validMessages.Any(m => actualMessage.Contains(m)),
-                $"Unexpected notification: {actualMessage}");
         }
 
         [Then(@"""(.*)"" should appear in the Languages list")]
@@ -147,8 +94,8 @@ namespace qa_dotnet_cucumber.Steps
             }
         }
 
-        [When(@"I try to add ""(.*)"" again")]
-        public void WhenITryToAddAgain(string language)
+        [When(@"I try to add ""(.*)"" language again")]
+        public void WhenITryToAddLanguageAgain(string language)
         {
             if (!_languagePage.IsAddNewButtonVisible())
             {
@@ -169,7 +116,7 @@ namespace qa_dotnet_cucumber.Steps
             }
         }
 
-        [Then(@"""(.*)"" should not be duplicated in the list")]
+        [Then(@"""(.*)"" should not be duplicated in the Languages list")]
         public void ThenShouldNotBeDuplicatedInTheList(string language)
         {
             Assert.That(_languagePage.IsLanguageUnique(language), Is.True, $"{language} is duplicated in the Languages list.");
@@ -261,20 +208,20 @@ namespace qa_dotnet_cucumber.Steps
             }
         }
 
-        [When(@"I click the edit icon for ""(.*)""")]
-        public void WhenIClickTheEditIconFor(string language)
+        [When(@"I click the edit icon for ""(.*)"" language")]
+        public void WhenIClickTheEditIconForLanguage(string language)
         {
             _languagePage.ClickEditIcon(language);
         }
 
-        [When(@"I change the level to ""(.*)""")]
-        public void WhenIChangeTheLevelTo(string level)
+        [When(@"I change the language level to ""(.*)""")]
+        public void WhenIChangeTheLanguageLevelTo(string level)
         {
             _languagePage.SelectLevel(level);
         }
 
-        [When(@"I save the changes")]
-        public void WhenISaveTheChanges()
+        [When(@"I save the language changes")]
+        public void WhenISaveTheLanguageChanges()
         {
             _languagePage.SaveLanguage();
         }
@@ -317,21 +264,27 @@ namespace qa_dotnet_cucumber.Steps
         // ----------------------
         // Delete Language
         // ----------------------
-        [When(@"I click the delete icon for ""(.*)""")]
-        public void WhenIClickTheDeleteIconFor(string language)
+
+        [When(@"I click the delete icon for language ""(.*)""")]
+        public void WhenIClickTheDeleteIconForLanguage(string language)
         {
-            _actionOccurred = false;
+            bool deleted = false; // Track if deletion actually happened
 
             if (_languagePage.IsLanguagePresent(language))
             {
                 _languagePage.ClickDeleteIcon(language);
+
+                // Wait until the language disappears
                 _wait.Until(driver => !_languagePage.IsLanguagePresent(language));
-                _actionOccurred = true;
+                deleted = true; // Deletion successful
             }
             else
             {
                 Console.WriteLine($"Language '{language}' not found, skipping delete.");
             }
+
+            // Update the common _actionOccurred flag
+            _commonSteps.SetActionOccurred(deleted);
         }
 
         [Then(@"""(.*)"" should not appear in my Languages list")]

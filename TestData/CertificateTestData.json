@@ -1,0 +1,139 @@
+{
+  "Certificates": {
+    "AddCertificate": [
+      {
+        "Certificate/Award": "Word Expert",
+        "Certificate From": "Microsoft",
+        "Year": "2023"
+      },
+      {
+        "Certificate/Award": "Excel Master",
+        "Certificate From": "Microsoft",
+        "Year": "2024"
+      },
+      {
+        "Certificate/Award": "Python Master",
+        "Certificate From": "Udemy",
+        "Year": "2022"
+      }
+    ],
+    "AddCertificateValidation": [
+      {
+        "Certificate/Award": "",
+        "Certificate From": "Microsoft",
+        "Year": "2023"
+      },
+      {
+        "Certificate/Award": "Excel Master",
+        "Certificate From": "",
+        "Year": "2024"
+      }
+    ],
+    "DuplicateCertificate": [
+      {
+        "Certificate/Award": "Word Expert",
+        "Certificate From": "Microsoft",
+        "Year": "2023"
+      }
+    ],
+    "AllowSameNameDifferentFrom": [
+      {
+        "Certificate/Award": "Excel Master",
+        "Certificate From": "Microsoft",
+        "Year": "2024",
+        "New Certificate From": "Udemy"
+      }
+    ],
+    "AddMultipleCertificates": [
+      {
+        "Certificate/Award": "Adobe Expert",
+        "Certificate From": "Adobe",
+        "Year": "2023"
+      },
+      {
+        "Certificate/Award": "Excel Master",
+        "Certificate From": "Microsoft",
+        "Year": "2024"
+      },
+      {
+        "Certificate/Award": "Python Master",
+        "Certificate From": "Udemy",
+        "Year": "2022"
+      }
+    ],
+    "EditCertificate": [
+      {
+        "Old Certificate/Award": "Adobe Expert",
+        "Old Certificate From": "Adobe",
+        "Old Year": "2023",
+        "New Certificate/Award": "Adobe Designer",
+        "New Certificate From": "Adobe",
+        "New Year": "2024"
+      }
+    ],
+    "EditCertificateDuplicate": {
+      "ExistingCertificates": [
+        {
+          "Certificate/Award": "Adobe Expert",
+          "Certificate From": "Adobe",
+          "Year": "2023"
+        },
+        {
+          "Certificate/Award": "Web Designer",
+          "Certificate From": "Coursera",
+          "Year": "2024"
+        }
+      ],
+      "EditAttempt": {
+        "Old Certificate/Award": "Web Designer",
+        "Old Certificate From": "Coursera",
+        "Old Year": "2024",
+        "New Certificate/Award": "Adobe Expert",
+        "New Certificate From": "Adobe",
+        "New Year": "2023"
+      }
+    },
+    "DeleteCertificate": [
+      {
+        "Certificate/Award": "Python Master",
+        "Certificate From": "Udemy",
+        "Year": "2022"
+      }
+    ],
+    "ViewCertificates": [
+      {
+        "Certificate/Award": "Adobe Expert",
+        "Certificate From": "Adobe",
+        "Year": "2023"
+      },
+      {
+        "Certificate/Award": "Excel Master",
+        "Certificate From": "Microsoft",
+        "Year": "2024"
+      },
+      {
+        "Certificate/Award": "Python Master",
+        "Certificate From": "Udemy",
+        "Year": "2022"
+      }
+    ],
+    "InvalidCharacterValidation": [
+      {
+        "Certificate/Award": "$$$$$$",
+        "Certificate From": "Adobe!@#",
+        "Year": "2024"
+      }
+    ],
+    "LongInputValidation": [
+      {
+        "Certificate/Award": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Certificate From": "Adobe",
+        "Year": "2023"
+      }
+    ],
+    "YearDropdownRange": {
+      "MinYear": 2005,
+      "MaxYear": 2025
+    }
+  }
+}

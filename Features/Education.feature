@@ -15,9 +15,9 @@ Scenario Outline: 1-Add Education Successfully
     And I should see a success message confirming education added
 
     Examples:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia | APIC       | MTech | MIT    | 2021            |
-      | India     | GEC Patan  | BTech | BE     | 2011            |
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia | APIC       | M.Tech  | MIT    | 2021            |
+      | India     | GEC Patan  | B.Tech  | BE     | 2011            |
 
 @AddEducationValidation
 Scenario Outline: 2-Add Education with Missing Mandatory Fields
@@ -25,9 +25,9 @@ Scenario Outline: 2-Add Education with Missing Mandatory Fields
     Then I should see an error message for missing fields
 
     Examples:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia |           | MTech | MIT    | 2021            |
-      | India     | GEC Patan  | BTech |        | 2011            |
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia |             | M.Tech  | MIT    | 2021            |
+      | India     | GEC Patan  | B.Tech  |        | 2011            |
 
 @DuplicateEducation
 Scenario Outline: 3-Add Duplicate Education
@@ -36,8 +36,8 @@ Scenario Outline: 3-Add Duplicate Education
     Then I should see a message "Duplicate data is not allowed"
 
     Examples:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia | APIC       | MTech | MIT    | 2021            |
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia | APIC       | M.Tech  | MIT    | 2021            |
 
 @AllowSameUniTitleDifferentDegree
 Scenario Outline: 4-Allow Same University and Title but Different Degree
@@ -46,16 +46,16 @@ Scenario Outline: 4-Allow Same University and Title but Different Degree
     Then the system should allow adding the record successfully
 
     Examples:
-      | Country   | University | Title | Degree | Graduation Year | New Degree |
-      | India     | GEC Patan  | BTech | BE     | 2011            | MTech      |
+      | Country   | University | Title   | Degree | Graduation Year | New Degree |
+      | India     | GEC Patan  | B.Tech  | BE     | 2011            | M.Tech     |
 
 @AddMultipleEducation
 Scenario Outline: 5-Add Multiple Education Records
     When I add multiple education records:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia | APIC       | MTech | MIT    | 2021            |
-      | India     | GEC Patan  | BTech | BE     | 2011            |
-      | USA       | MIT        | B.Sc  | Degree | 2020            |
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia | APIC       | M.Tech  | MIT    | 2021            |
+      | India     | GEC Patan  | B.Tech  | BE     | 2011            |
+      | USA       | MIT        | B.Sc    | Degree | 2020            |
     Then all added education records should appear correctly in the list
 
 @CancelEducation
@@ -72,15 +72,15 @@ Scenario Outline: 7-Edit Education Successfully
 
     Examples:
       | Old Country | Old University | Old Title | Old Degree | Old Graduation Year | New Country | New University | New Title | New Degree | New Graduation Year |
-      | Australia   | APIC           | MTech     | MIT        | 2021               | Australia   | QUT            | MTech     | MIT        | 2022               |
+      | Australia   | APIC           | M.Tech    | MIT        | 2021                | Australia   | QUT            | M.Tech    | MIT        | 2022                |
 
 @EditEducationDuplicate
 Scenario Outline: 8-Edit Education Duplicate Validation
     Given I have two education records:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia | APIC       | MTech | MIT    | 2021            |
-      | India     | GEC Patan  | BTech | BE     | 2011            |
-    When I try to edit 'India / GEC Patan / BTech / BE' to 'Australia / APIC / MTech / MIT'
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia | APIC       | M.Tech  | MIT    | 2021            |
+      | India     | GEC Patan  | B.Tech  | BE     | 2011            |
+    When I try to edit 'India / GEC Patan / B.Tech / BE' to 'Australia / APIC / M.Tech / MIT'
     Then I should see a message "Duplicate data is not allowed"
 
 @DeleteEducation
@@ -97,10 +97,10 @@ Scenario Outline: 9-Delete Education Successfully
 @ViewEducation
 Scenario Outline: 10-View All Education Records
     Given I have multiple education records added:
-      | Country   | University | Title | Degree | Graduation Year |
-      | Australia | APIC       | MTech | MIT    | 2021            |
-      | India     | GEC Patan  | BTech | BE     | 2011            |
-      | USA       | MIT        | B.Sc  | Degree | 2020            |
+      | Country   | University | Title   | Degree | Graduation Year |
+      | Australia | APIC       | M.Tech  | MIT    | 2021            |
+      | India     | GEC Patan  | B.Tech  | BE     | 2011            |
+      | USA       | MIT        | B.Sc    | Degree | 2020            |
     When I view the education list
     Then I should see all education records displayed correctly
 
@@ -111,8 +111,8 @@ Scenario Outline: 11-Validation of Invalid Characters
     Then I should see a proper error message for invalid input
 
     Examples:
-      | Country | University | Title | Degree | Graduation Year |
-      | USA     | MIT!@#     | B.Sc  | Degree | 2020             |
+      | Country | University | Title   | Degree | Graduation Year |
+      | USA     | MIT!@#     | B.Sc    | Degree | 2020            |
 
 @LongInputEducation
 Scenario Outline: 12-Validation for Long Text Input
@@ -120,5 +120,5 @@ Scenario Outline: 12-Validation for Long Text Input
     Then the system should save and display the long input correctly without errors
 
     Examples:
-      | Country | University                                           | Title  | Degree  | Graduation Year |
-      | USA     | AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | B.Sc  | Degree | 2020             |
+      | Country | University                                            | Title   | Degree | Graduation Year |
+      | USA     | AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA | B.Sc    | Degree | 2020            |

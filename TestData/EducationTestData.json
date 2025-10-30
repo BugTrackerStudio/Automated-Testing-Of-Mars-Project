@@ -1,105 +1,10 @@
 {
-  "GraduationYearRange": {
-    "Min": 1995,
-    "Max": 2025
-  },
-  "AddEducation": [
-    {
-      "Country": "Australia",
-      "University": "APIC",
-      "Title": "M.Tech",
-      "Degree": "MIT",
-      "GraduationYear": "2021"
+  "EducationData": {
+    "GraduationYearRange": {
+      "Min": 1995,
+      "Max": 2025
     },
-    {
-      "Country": "India",
-      "University": "GEC Patan",
-      "Title": "B.Tech",
-      "Degree": "BE",
-      "GraduationYear": "2011"
-    },
-    {
-      "Country": "USA",
-      "University": "MIT",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ],
-  "AddEducationValidation": [
-    {
-      "Country": "Australia",
-      "University": "",
-      "Title": "M.Tech",
-      "Degree": "MIT",
-      "GraduationYear": "2021"
-    },
-    {
-      "Country": "India",
-      "University": "GEC Patan",
-      "Title": "B.Tech",
-      "Degree": "",
-      "GraduationYear": "2011"
-    }
-  ],
-  "DuplicateEducation": [
-    {
-      "Country": "Australia",
-      "University": "APIC",
-      "Title": "M.Tech",
-      "Degree": "MIT",
-      "GraduationYear": "2021"
-    }
-  ],
-  "AllowSameUniTitleDifferentDegree": [
-    {
-      "Country": "India",
-      "University": "GEC Patan",
-      "Title": "B.Tech",
-      "Degree": "BE",
-      "GraduationYear": "2011",
-      "NewDegree": "M.Tech"
-    }
-  ],
-  "AddMultipleEducation": [
-    {
-      "Country": "Australia",
-      "University": "APIC",
-      "Title": "M.Tech",
-      "Degree": "MIT",
-      "GraduationYear": "2021"
-    },
-    {
-      "Country": "India",
-      "University": "GEC Patan",
-      "Title": "B.Tech",
-      "Degree": "BE",
-      "GraduationYear": "2011"
-    },
-    {
-      "Country": "USA",
-      "University": "MIT",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ],
-  "EditEducation": [
-    {
-      "OldCountry": "Australia",
-      "OldUniversity": "APIC",
-      "OldTitle": "M.Tech",
-      "OldDegree": "MIT",
-      "OldGraduationYear": "2021",
-      "NewCountry": "Australia",
-      "NewUniversity": "QUT",
-      "NewTitle": "M.Tech",
-      "NewDegree": "MIT",
-      "NewGraduationYear": "2022"
-    }
-  ],
-  "EditEducationDuplicate": {
-    "ExistingRecords": [
+    "AddEducation": [
       {
         "Country": "Australia",
         "University": "APIC",
@@ -113,71 +18,168 @@
         "Title": "B.Tech",
         "Degree": "BE",
         "GraduationYear": "2011"
+      },
+      {
+        "Country": "USA",
+        "University": "MIT",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
       }
     ],
-    "EditAttempt": {
-      "From": {
+    "AddEducationValidation": [
+      {
+        "Country": "Australia",
+        "University": "",
+        "Title": "M.Tech",
+        "Degree": "MIT",
+        "GraduationYear": "2021"
+      },
+      {
         "Country": "India",
         "University": "GEC Patan",
         "Title": "B.Tech",
-        "Degree": "BE"
-      },
-      "To": {
+        "Degree": "",
+        "GraduationYear": "2011"
+      }
+    ],
+    "DuplicateEducation": [
+      {
         "Country": "Australia",
         "University": "APIC",
         "Title": "M.Tech",
-        "Degree": "MIT"
+        "Degree": "MIT",
+        "GraduationYear": "2021"
       }
-    }
-  },
-  "DeleteEducation": [
-    {
-      "Country": "USA",
-      "University": "MIT",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ],
-  "ViewEducation": [
-    {
-      "Country": "Australia",
-      "University": "APIC",
-      "Title": "M.Tech",
-      "Degree": "MIT",
-      "GraduationYear": "2021"
+    ],
+    "AllowSameUniTitleDifferentDegree": [
+      {
+        "Country": "India",
+        "University": "GEC Patan",
+        "Title": "B.Tech",
+        "Degree": "BE",
+        "GraduationYear": "2011",
+        "NewDegree": "M.Tech"
+      }
+    ],
+    "AddMultipleEducation": [
+      {
+        "Country": "Australia",
+        "University": "APIC",
+        "Title": "M.Tech",
+        "Degree": "MIT",
+        "GraduationYear": "2021"
+      },
+      {
+        "Country": "India",
+        "University": "GEC Patan",
+        "Title": "B.Tech",
+        "Degree": "BE",
+        "GraduationYear": "2011"
+      },
+      {
+        "Country": "USA",
+        "University": "MIT",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
+      }
+    ],
+    "EditEducation": [
+      {
+        "OldCountry": "Australia",
+        "OldUniversity": "APIC",
+        "OldTitle": "M.Tech",
+        "OldDegree": "MIT",
+        "OldGraduationYear": "2021",
+        "NewCountry": "Australia",
+        "NewUniversity": "QUT",
+        "NewTitle": "M.Tech",
+        "NewDegree": "MIT",
+        "NewGraduationYear": "2022"
+      }
+    ],
+    "EditEducationDuplicate": {
+      "ExistingRecords": [
+        {
+          "Country": "Australia",
+          "University": "APIC",
+          "Title": "M.Tech",
+          "Degree": "MIT",
+          "GraduationYear": "2021"
+        },
+        {
+          "Country": "India",
+          "University": "GEC Patan",
+          "Title": "B.Tech",
+          "Degree": "BE",
+          "GraduationYear": "2011"
+        }
+      ],
+      "EditAttempt": {
+        "From": {
+          "Country": "India",
+          "University": "GEC Patan",
+          "Title": "B.Tech",
+          "Degree": "BE"
+        },
+        "To": {
+          "Country": "Australia",
+          "University": "APIC",
+          "Title": "M.Tech",
+          "Degree": "MIT"
+        }
+      }
     },
-    {
-      "Country": "India",
-      "University": "GEC Patan",
-      "Title": "B.Tech",
-      "Degree": "BE",
-      "GraduationYear": "2011"
-    },
-    {
-      "Country": "USA",
-      "University": "MIT",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ],
-  "InvalidCharacterEducation": [
-    {
-      "Country": "USA",
-      "University": "MIT!@#",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ],
-  "LongInputEducation": [
-    {
-      "Country": "USA",
-      "University": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-      "Title": "B.Sc",
-      "Degree": "Degree",
-      "GraduationYear": "2020"
-    }
-  ]
+    "DeleteEducation": [
+      {
+        "Country": "USA",
+        "University": "MIT",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
+      }
+    ],
+    "ViewEducation": [
+      {
+        "Country": "Australia",
+        "University": "APIC",
+        "Title": "M.Tech",
+        "Degree": "MIT",
+        "GraduationYear": "2021"
+      },
+      {
+        "Country": "India",
+        "University": "GEC Patan",
+        "Title": "B.Tech",
+        "Degree": "BE",
+        "GraduationYear": "2011"
+      },
+      {
+        "Country": "USA",
+        "University": "MIT",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
+      }
+    ],
+    "InvalidCharacterEducation": [
+      {
+        "Country": "USA",
+        "University": "MIT!@#",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
+      }
+    ],
+    "LongInputEducation": [
+      {
+        "Country": "USA",
+        "University": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Title": "B.Sc",
+        "Degree": "Degree",
+        "GraduationYear": "2020"
+      }
+    ]
+  }
 }

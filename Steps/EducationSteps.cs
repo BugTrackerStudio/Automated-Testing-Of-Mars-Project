@@ -4,6 +4,7 @@ using qa_dotnet_cucumber.Pages;
 using Reqnroll;
 using NUnit.Framework;
 using SeleniumExtras.WaitHelpers;
+using qa_dotnet_cucumber.Helpers;
 
 namespace qa_dotnet_cucumber.Steps
 {
@@ -23,8 +24,13 @@ namespace qa_dotnet_cucumber.Steps
 
         //AddEducation
         [When(@"I add my education including '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
-        public void WhenIAddMyEducation(string country, string university, string title, string degree, string graduationYear)
+        public void WhenIAddMyEducation()
         {
+            string country = JsonReader.GetValue("EducationData", "AddEducation", "Country");
+            string university = JsonReader.GetValue("EducationData", "AddEducation", "University");
+            string title = JsonReader.GetValue("EducationData", "AddEducation", "Title");
+            string degree = JsonReader.GetValue("EducationData", "AddEducation", "Degree");
+            string graduationYear = JsonReader.GetValue("EducationData", "AddEducation", "GraduationYear");
         }
 
         [Then(@"I am able to see my education details including '([^']*)', '([^']*)', '([^']*)', '([^']*)', '([^']*)'")]

@@ -4,6 +4,7 @@ using qa_dotnet_cucumber.Pages;
 using Reqnroll;
 using NUnit.Framework;
 using SeleniumExtras.WaitHelpers;
+using qa_dotnet_cucumber.Helpers;
 
 namespace qa_dotnet_cucumber.Steps
 {
@@ -23,8 +24,11 @@ namespace qa_dotnet_cucumber.Steps
 
         //AddCertificate
         [When(@"I add my certificate including '([^']*)', '([^']*)', '([^']*)'")]
-        public void WhenIAddMyCertificate(string award, string from, string year)
+        public void WhenIAddMyCertificate()
         {
+            string award = JsonReader.GetValue("CertificateData", "AddCertificate", "Certificate/Award");
+            string from = JsonReader.GetValue("CertificateData", "AddCertificate", "Certificate From");
+            string year = JsonReader.GetValue("CertificateData", "AddCertificate", "Year");
         }
 
         [Then(@"I should see my certificate details including '([^']*)', '([^']*)', '([^']*)'")]

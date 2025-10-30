@@ -66,15 +66,30 @@ namespace qa_dotnet_cucumber.Steps
             // All valid messages for both languages and skills
             string[] validMessages = new[]
             {
+                // Languages
                 "has been added to your languages",
                 "already exist",
                 "already added",
                 "has been deleted from your languages",
                 "Duplicate data",
                 "has been updated to your languages",
+
+                 // Skills
                 "has been added to your skills",
                 "has been deleted",
-                "has been updated to your skills"
+                "has been updated to your skills",
+
+                // Education
+                "this information is already exists",
+                "education as been updated",
+                "Education entry successfully removed",
+                "Education has been added",
+                "Please enter all the fields",
+
+                 // Certification
+                "has been updated to your certification",
+                "has been added to your certification",
+                "has been deleted from your certification"
             };
 
             Assert.That(validMessages.Any(m => actualMessage.Contains(m)),

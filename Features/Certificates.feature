@@ -13,7 +13,7 @@ Feature: Manage Certificates on Profile
 Scenario Outline: 1-Add Certificate 
 	When I add my certificate including '<Certificate/Award>', '<Certificate From>', '<Year>'
 	Then I am able to see my certificate details including '<Certificate/Award>', '<Certificate From>', '<Year>'
-	And I should see a success message confirming certificate added
+	And I should see a notification "<Certificate/Award> has been added"
 
 	 Examples:
       | Certificate/Award | Certificate From | Year |
@@ -23,7 +23,7 @@ Scenario Outline: 1-Add Certificate
 @AddCertificateValidation
   Scenario Outline: 2-Add Certificate with Missing Mandatory Fields
     When I try to add a certificate with missing details '<Certificate/Award>', '<Certificate From>', '<Year>'
-    Then I should see an error message for missing fields
+    Then I should see a notification "Please enter Certification Name, Certification From and Certification Year"
 
     Examples:
       | Certificate/Award | Certificate From | Year |
@@ -34,7 +34,7 @@ Scenario Outline: 1-Add Certificate
   Scenario Outline: 3-Add Duplicate Certificate
     Given I have an existing certificate '<Certificate/Award>' from '<Certificate From>' in year '<Year>'
     When I add the same certificate again
-    Then I should see a message "Duplicate data is not allowed"
+    Then I should see a message "Duplicate Data"
 
     Examples:
       | Certificate/Award | Certificate From | Year |
@@ -54,9 +54,9 @@ Scenario Outline: 1-Add Certificate
   Scenario Outline: 5-Add Multiple Certificates
     When I add multiple certificates:
       | Certificate/Award | Certificate From | Year |
-      | Adobe Expert       | Adobe            | 2023 |
-      | Excel Master       | Microsoft        | 2024 |
-      | Python Master      | Udemy            | 2022 |
+      | Adobe Expert       | Adobe           | 2023 |
+      | Excel Master       | Microsoft       | 2024 |
+      | Python Master      | Udemy           | 2022 |
     Then all added certificates should appear correctly in the list
 
 @CancelCertificate
@@ -69,7 +69,7 @@ Scenario Outline: 1-Add Certificate
     Given I have an existing certificate '<Old Certificate/Award>' from '<Old Certificate From>' in year '<Old Year>'
     When I edit my certificate to '<New Certificate/Award>', '<New Certificate From>', '<New Year>'
     Then I should see my updated certificate details including '<New Certificate/Award>', '<New Certificate From>', '<New Year>'
-    And I should see a success message confirming update
+    And I should see a notification "<New Certificate/Award> has been updated"
 
     Examples:
       | Old Certificate/Award | Old Certificate From | Old Year | New Certificate/Award | New Certificate From | New Year |
@@ -82,13 +82,13 @@ Scenario Outline: 1-Add Certificate
       | Adobe Expert      | Adobe            | 2023 |
       | Web Designer      | Coursera         | 2024 |
     When I try to edit 'Web Designer' to 'Adobe Expert' from 'Adobe'
-    Then I should see a message "Duplicate data is not allowed"
+    Then I should see a message "Duplicate data"
 
 @DeleteCertificate
   Scenario Outline: 10-Delete Certificate Successfully
     Given I have an existing certificate '<Certificate/Award>' from '<Certificate From>' in year '<Year>'
     When I delete my certificate
-    Then I should see a success message confirming delete
+    Then I should see a notification "<Certificate/Award> has been deleted from your certification"
     And the certificate should no longer appear in the list
 
     Examples:

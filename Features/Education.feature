@@ -12,7 +12,7 @@ Feature: Manage Education on Profile
 Scenario Outline: 1-Add Education Successfully
     When I add my education including '<Country>', '<University>', '<Title>', '<Degree>', '<Graduation Year>'
     Then I am able to see my education details including '<Country>', '<University>', '<Title>', '<Degree>', '<Graduation Year>'
-    And I should see a success message confirming education added
+    And I should see a message "Education has been added"
 
     Examples:
       | Country   | University | Title   | Degree | Graduation Year |
@@ -22,18 +22,18 @@ Scenario Outline: 1-Add Education Successfully
 @AddEducationValidation
 Scenario Outline: 2-Add Education with Missing Mandatory Fields
     When I try to add an education record with missing details '<Country>', '<University>', '<Title>', '<Degree>', '<Graduation Year>'
-    Then I should see an error message for missing fields
+    Then I should see a notification "Please enter all the fields"
 
     Examples:
       | Country   | University | Title   | Degree | Graduation Year |
-      | Australia |             | M.Tech  | MIT    | 2021            |
+      | Australia |            | M.Tech  | MIT    | 2021            |
       | India     | GEC Patan  | B.Tech  |        | 2011            |
 
 @DuplicateEducation
 Scenario Outline: 3-Add Duplicate Education
     Given I have an existing education '<Country>', '<University>', '<Title>', '<Degree>', '<Graduation Year>'
     When I add the same education again
-    Then I should see a message "Duplicate data is not allowed"
+    Then I should see a message "Duplicate Data"
 
     Examples:
       | Country   | University | Title   | Degree | Graduation Year |
@@ -68,7 +68,7 @@ Scenario Outline: 7-Edit Education Successfully
     Given I have an existing education '<Old Country>', '<Old University>', '<Old Title>', '<Old Degree>', '<Old Graduation Year>'
     When I edit my education to '<New Country>', '<New University>', '<New Title>', '<New Degree>', '<New Graduation Year>'
     Then I should see my updated education details including '<New Country>', '<New University>', '<New Title>', '<New Degree>', '<New Graduation Year>'
-    And I should see a success message confirming update
+    And I should see a notification "education as been updated"
 
     Examples:
       | Old Country | Old University | Old Title | Old Degree | Old Graduation Year | New Country | New University | New Title | New Degree | New Graduation Year |
@@ -81,13 +81,13 @@ Scenario Outline: 8-Edit Education Duplicate Validation
       | Australia | APIC       | M.Tech  | MIT    | 2021            |
       | India     | GEC Patan  | B.Tech  | BE     | 2011            |
     When I try to edit 'India / GEC Patan / B.Tech / BE' to 'Australia / APIC / M.Tech / MIT'
-    Then I should see a message "Duplicate data is not allowed"
+    Then I should see a message "Duplicate Data"
 
 @DeleteEducation
 Scenario Outline: 9-Delete Education Successfully
     Given I have an existing education '<Country>', '<University>', '<Title>', '<Degree>', '<Graduation Year>'
     When I delete my education record
-    Then I should see a success message confirming delete
+    Then I should see a "Education entry successfully removed"
     And the education record should no longer appear in the list
 
     Examples:

@@ -103,6 +103,7 @@ namespace qa_dotnet_cucumber.Hooks
         public void AfterScenario()
         {
             var driver = _objectContainer.Resolve<IWebDriver>();
+            //for debugging purpose only commented
             driver?.Quit();
             Console.WriteLine($"Finished scenario on Thread {Thread.CurrentThread.ManagedThreadId} at {DateTime.Now}");
         }
